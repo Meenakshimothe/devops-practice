@@ -1,9 +1,8 @@
-name: DevOps CI Pipeline
+name: DevOps CI/CD Pipeline
 
 on:
   push:
-    branches:
-      - main
+    branches: [ main ]
   pull_request:
 
 jobs:
@@ -11,8 +10,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout repository
+    - name: Checkout code
       uses: actions/checkout@v4
 
-    - name: Run basic validation
-      run: echo "CI pipeline started successfully"
+    - name: Verify repository structure
+      run: ls -R
+
+    - name: Build Docker image
+      run: docker build -t devops-practice-demo ./github-actions
